@@ -51,14 +51,19 @@ namespace ReadAndWatchList.Controllers
 
 			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
 			ViewBag.SeriesIdChoices = SeriesSelectList();
-            return View();
+			MoviesAndBooksViewModel model = new MoviesAndBooksViewModel();
+			model.Grade = GradeSelectList();
+			model.MainCategory = CategorySelectList();
+			model.Series = SeriesSelectList();
+			model.SubCategory = SubCategorySelectList();
+			return View(model);
         }
 
         // POST: MoviesAndBooks/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         //public ActionResult Create([Bind(Include = "Name,Description,OtherPlatforms,GradeId,PartOffSerie,SerieId,MainCategoryId,SubCategoriId")] MoviesAndBooks MoviesAndBooks)
-        public ActionResult Create(string Name = "", string Description = "",string OtherPlatforms = "",int? GradeId = null,bool PartOffSerie = false,int? SerieId = null,int? MainCategoryId = null,int? SubCategoriId = null)
+        public ActionResult Create(string Name = "", string Description = "",string OtherPlatforms = "",int? GradeId = null,bool PartOffSerie = false,int? SerieId = null,int? MainCategoryId = null,int? SubCategoryId = null)
         {
 			ViewBag.GradeIdChoices = GradeSelectList();
 			ViewBag.MainCategoryIdChoices = CategorySelectList();
@@ -68,7 +73,7 @@ namespace ReadAndWatchList.Controllers
             
             if (ModelState.IsValid)
                 {
-                    _moviesAndBooksRepo.Create(Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
+                    _moviesAndBooksRepo.Create(Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoryId);
                     return RedirectToAction("Index");
                 }
 
@@ -172,26 +177,34 @@ namespace ReadAndWatchList.Controllers
         }
 
 		#region SelectLists
-		private SelectList GradeSelectList()
+		private SelectList GradeSelectList(int? id = null)
 		{
 			GradesRepository _gradeRepo = new GradesRepository();
-			return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
+			var items = _gradeRepo.GetAll();
+			//return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
+			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text",items.FirstOrDefault(e => e.Id == id));
 		}
-		private SelectList CategorySelectList()
+		private SelectList CategorySelectList(int? id = null)
 		{
 			CategoriesRepository _categoryRepo = new CategoriesRepository();
-			return new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
+			var items = _categoryRepo.GetAll();
+			//return new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
+			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
 		}
 
-		private SelectList SubCategorySelectList()
+		private SelectList SubCategorySelectList(int? id = null)
 		{
 			SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-			return new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoryId = g.Id, Name = g.Name }), "SubCategoryId", "Name");
+			var items = _subCategoryRepo.GetAll();
+			//return new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoryId = g.Id, Name = g.Name }), "SubCategoryId", "Name");
+			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
 		}
-		private SelectList SeriesSelectList()
+		private SelectList SeriesSelectList(int? id = null)
 		{
 			SeriesRepository _seriesRepo = new SeriesRepository();
-			return new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
+			var items = _seriesRepo.GetAll();
+			//return new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
+			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.SerieName }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
 		}
 		#endregion
     }

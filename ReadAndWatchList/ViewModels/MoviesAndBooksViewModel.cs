@@ -19,15 +19,15 @@ namespace ReadAndWatchList.ViewModels
 
 
 		[Display(Name = "Grade")]
-		public List<Grades> Grade { get; set; }
+		public IEnumerable<System.Web.Mvc.SelectListItem> Grade { get; set; }
 
 		[Display(Name = "Serie")]
-		public List<Series> Series { get; set; }
+		public IEnumerable<System.Web.Mvc.SelectListItem> Series { get; set; }
 
 		[Display(Name = "Main Category")]
-		public List<Categories> MainCategory { get; set; }
+		public IEnumerable<System.Web.Mvc.SelectListItem> MainCategory { get; set; }
 
 		[Display(Name = "Sub Category")]
-		public List<SubCategories> SubCategory { get; set; }
+		public IEnumerable<System.Web.Mvc.SelectListItem> SubCategory { get; set; }
 	}
 }
