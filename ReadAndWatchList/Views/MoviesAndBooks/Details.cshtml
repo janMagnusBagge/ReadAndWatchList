@@ -1,0 +1,100 @@
+﻿@model ReadAndWatchList.Models.MoviesAndBooks
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MoviesAndBooks</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Grade.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Grade.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainCategorie.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainCategorie.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Series.SerieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Series.SerieName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategori.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategori.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherPlatforms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherPlatforms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Similar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Similar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PartOffSerie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartOffSerie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WhatSerieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WhatSerieName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    <a href="@Url.Action("Edit", new { id=Model.Id})" class="btn btn-info btn-sm col-xs-1" title="Edit">Edit <span class="glyphicon glyphicon-edit"></span></a> |
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="@Url.Action("Index")" class="btn btn-default">Back to List </a>
+</p>

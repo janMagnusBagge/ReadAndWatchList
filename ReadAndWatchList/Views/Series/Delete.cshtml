@@ -1,0 +1,41 @@
+﻿@model ReadAndWatchList.Models.Series
+
+@{
+    ViewBag.Title = "Delete Serie";
+}
+
+<h2>Delete Serie</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Serie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SerieName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SerieName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @*@Html.ActionLink("Back to Series", "Index")*@
+            <a href="@Url.Action("Index")" class="btn btn-default">Back to Series </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,36 @@
+﻿@model ReadAndWatchList.Models.Categories
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Categories</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    <a href="@Url.Action("Edit", new { id=Model.Id})" class="btn btn-info btn-sm col-xs-1" title="Edit">Edit <span class="glyphicon glyphicon-edit"></span></a> |
+    @*@Html.ActionLink("Back to Categorylist", "Index")*@
+    <a href="@Url.Action("Index")" class="btn btn-default">Back to Categorylist</a>
+</p>

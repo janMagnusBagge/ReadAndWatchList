@@ -1,0 +1,91 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Sätter dropdown meny alternativ till att visas när man för musen över men bara på skärmsorlekar större än viss pixelstorlek*/
+@media screen and (min-width: 831px) {
+    .dropdown:hover .dropdown-menu {
+        display: block;
+        margin-top: 0;
+        /*remove the gap so it doesn't close;*/
+    }
+
+    #GCS.dropdown-menu{
+        min-width:45vw;
+        width: 45vw;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    
+    #GCS.dropdown-menu{
+        min-width:30vw;
+        width: 30vw;
+    }
+}
+
+/*Sätter så att "override" bootstraps list-inline på skärmar mindre än viss storlek så att valen hamnar under varandra istället för att försöka hamna sida vid sida*/
+@media screen and (max-width: 831px) {
+    .list-inline > li {
+      display: block;
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+     #GCS.dropdown-menu{
+        min-width:40vw;
+        width: 40vw;
+    }
+}
+
+
+
+/*kommer nog inte behöva nedan om jag väljer bort 2 navbars*/
+.nav2 {
+  margin-top: 50px;
+}
+
+/*hittde meny för med denna css på http://bootsnipp.com/snippets/featured/toggle-navbar*/
+/*.navbar-brand { position: relative; z-index: 2; }
+
+.navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; }
+
+.navbar .navbar-collapse { position: relative; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
+
+.navbar .nav-collapse { position: absolute; z-index: 1; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 120px; padding-left: 80px; width: 100%; }
+.navbar.navbar-default .nav-collapse { background-color: #f8f8f8; }
+.navbar.navbar-inverse .nav-collapse { background-color: #222; }
+.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
+.nav-collapse>li { float: right; }
+
+.btn.btn-circle { border-radius: 50px; }
+.btn.btn-outline { background-color: transparent; }
+
+@media screen and (max-width: 767px) {
+    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
+    
+    .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
+    .navbar .nav-collapse .navbar-form { margin: 0; }
+    .nav-collapse>li { float: none; }
+}*/

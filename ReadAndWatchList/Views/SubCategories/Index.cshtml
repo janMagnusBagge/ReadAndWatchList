@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ReadAndWatchList.Models.SubCategories>
+
+@{
+    ViewBag.Title = "Sub Category";
+}
+
+<h2>Sub Category</h2>
+
+@*<p>
+    @Html.ActionLink("Create Sub Category", "Create")
+</p>*@
+<div class="well-sm">
+    <div class="btn-toolbar">
+        <a href="@Url.Action("Create")" class="btn btn-info btn-lg">Create Sub Category</a>
+    </div>
+</div>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @*<div class="btn-toolbar">
+                        <a href="@Url.Action("Edit", new { id=item.Id})" class="btn btn-info btn-sm" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Details", new { id=item.Id})" class="btn btn-warning btn-sm" title="Details"><span class="glyphicon glyphicon-expand"></span></a>
+                        <a href="@Url.Action("Delete", new { id=item.Id})" class="btn btn-danger btn-sm" title="Remove sub category"><span class="glyphicon glyphicon-remove"></span></a>
+                    </div>*@
+                <table class="btn-toolbar">
+                    <tbody>
+                        <tr>
+                            <td class="col-xs-4">
+                                <a href="@Url.Action("Edit", new { id=item.Id})" class="btn btn-info btn-sm col-xs-12" title="Edit">Edit <span class="glyphicon glyphicon-edit"></span></a>
+                            </td>
+                            <td class="col-xs-4">
+                                <a href="@Url.Action("Details", new { id=item.Id})" class="btn btn-warning btn-sm col-xs-12" title="Details">Details <span class="glyphicon glyphicon-expand"></span></a>
+                            </td>
+                            <td class="col-xs-4">
+                                <a href="@Url.Action("Delete", new { id=item.Id})" class="btn btn-danger btn-sm col-xs-12" title="Remove sub category">Remove <span class="glyphicon glyphicon-remove"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+}
+
+</table>
