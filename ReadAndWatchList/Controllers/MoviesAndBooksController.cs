@@ -1,4 +1,5 @@
-﻿using ReadAndWatchList.Models;
+﻿using ReadAndWatchList.Classes;
+using ReadAndWatchList.Models;
 using ReadAndWatchList.Repositories;
 using ReadAndWatchList.ViewModels;
 using System;
@@ -175,6 +176,30 @@ namespace ReadAndWatchList.Controllers
             var selected = model.Where(m => m.UpdateThis == true).ToList();
             return RedirectToAction("MultipleUpdate");
         }
+
+		public ActionResult SeveralUpdate()
+		{
+			var MnBs = _moviesAndBooksRepo.GetAll()
+				.Select(a => new
+				{
+					a.Id,
+					a.Description,
+					a.Grade, //behövs denna?
+					a.GradeId,
+					a.MainCategorie,//behövs denna?
+					a.MainCategoryId,
+					a.Name,
+					a.OtherPlatforms,
+					a.PartOffSerie,
+					a.SerieId,
+					a.Series, //behövs denna?
+					a.SubCategori, //behövs denna?
+					a.SubCategoryId
+				}
+				);
+
+			return ApiResult.Success(new { MnBs = MnBs });
+		}
 
 		#region SelectLists
 		private SelectList GradeSelectList(int? id = null)
