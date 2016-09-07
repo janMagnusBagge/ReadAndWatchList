@@ -46,16 +46,11 @@ namespace ReadAndWatchList.Controllers
         // GET: MoviesAndBooks/Create
         public ActionResult Create()
         {
-            GradesRepository _gradeRepo = new GradesRepository();
-            ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-            CategoriesRepository _categoryRepo = new CategoriesRepository();
-            ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
+			ViewBag.GradeIdChoices = GradeSelectList();
+			ViewBag.MainCategoryIdChoices = CategorySelectList();
 
-            SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-            ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
-            SeriesRepository _seriesRepo = new SeriesRepository();
-            ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
-
+			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			ViewBag.SeriesIdChoices = SeriesSelectList();
             return View();
         }
 
@@ -65,16 +60,12 @@ namespace ReadAndWatchList.Controllers
         //public ActionResult Create([Bind(Include = "Name,Description,OtherPlatforms,GradeId,PartOffSerie,SerieId,MainCategoryId,SubCategoriId")] MoviesAndBooks MoviesAndBooks)
         public ActionResult Create(string Name = "", string Description = "",string OtherPlatforms = "",int? GradeId = null,bool PartOffSerie = false,int? SerieId = null,int? MainCategoryId = null,int? SubCategoriId = null)
         {
-            GradesRepository _gradeRepo = new GradesRepository();
-            ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-            CategoriesRepository _categoryRepo = new CategoriesRepository();
-            ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
-            SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-            ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
-            SeriesRepository _seriesRepo = new SeriesRepository();
-            ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
-            //try
-            //{
+			ViewBag.GradeIdChoices = GradeSelectList();
+			ViewBag.MainCategoryIdChoices = CategorySelectList();
+
+			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			ViewBag.SeriesIdChoices = SeriesSelectList();
+            
             if (ModelState.IsValid)
                 {
                     _moviesAndBooksRepo.Create(Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
@@ -82,11 +73,7 @@ namespace ReadAndWatchList.Controllers
                 }
 
                 return View();
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            
         }
 
         // GET: MoviesAndBooks/Edit/5
@@ -102,14 +89,11 @@ namespace ReadAndWatchList.Controllers
                 return HttpNotFound();
             }
 
-            GradesRepository _gradeRepo = new GradesRepository();
-            ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-            CategoriesRepository _categoryRepo = new CategoriesRepository();
-            ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
-            SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-            ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
-            SeriesRepository _seriesRepo = new SeriesRepository();
-            ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
+			ViewBag.GradeIdChoices = GradeSelectList();
+			ViewBag.MainCategoryIdChoices = CategorySelectList();
+
+			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			ViewBag.SeriesIdChoices = SeriesSelectList();
             return View(_moviesAndBooks);
         }
 
@@ -118,16 +102,19 @@ namespace ReadAndWatchList.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int Id,string Name = "", string Description = "", string OtherPlatforms = "", int? GradeId = null, bool PartOffSerie = false, int? SerieId = null, int? MainCategoryId = null, int? SubCategoriId = null)
         {
-            GradesRepository _gradeRepo = new GradesRepository();
-            ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-            CategoriesRepository _categoryRepo = new CategoriesRepository();
-            ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
-            SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-            ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
-            SeriesRepository _seriesRepo = new SeriesRepository();
-            ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
-            //try
-            //{
+			//GradesRepository _gradeRepo = new GradesRepository();
+			//ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
+			//CategoriesRepository _categoryRepo = new CategoriesRepository();
+			//ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
+			//SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
+			//ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
+			//SeriesRepository _seriesRepo = new SeriesRepository();
+			//ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
+			ViewBag.GradeIdChoices = GradeSelectList();
+			ViewBag.MainCategoryIdChoices = CategorySelectList();
+
+			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			ViewBag.SeriesIdChoices = SeriesSelectList();
                 if (ModelState.IsValid)
                 {
                     _moviesAndBooksRepo.Edit(Id,Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
@@ -135,11 +122,6 @@ namespace ReadAndWatchList.Controllers
                 }
                 return View();
 
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
         }
 
         // GET: MoviesAndBooks/Delete/5
@@ -188,5 +170,29 @@ namespace ReadAndWatchList.Controllers
             var selected = model.Where(m => m.UpdateThis == true).ToList();
             return RedirectToAction("MultipleUpdate");
         }
+
+		#region SelectLists
+		private SelectList GradeSelectList()
+		{
+			GradesRepository _gradeRepo = new GradesRepository();
+			return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
+		}
+		private SelectList CategorySelectList()
+		{
+			CategoriesRepository _categoryRepo = new CategoriesRepository();
+			return new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
+		}
+
+		private SelectList SubCategorySelectList()
+		{
+			SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
+			return new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoryId = g.Id, Name = g.Name }), "SubCategoryId", "Name");
+		}
+		private SelectList SeriesSelectList()
+		{
+			SeriesRepository _seriesRepo = new SeriesRepository();
+			return new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
+		}
+		#endregion
     }
 }
