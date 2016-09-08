@@ -12,6 +12,23 @@
 </div>
 <div ng-controller="severalUpdateIndexController" ng-init="GetSeveralUpdate()">
 	
+	<div>
+		<div class="col-md-3">
+			<label><b>Grade:</b></label> <select ng-model="selectGrade" ng-options="y.Text for (x, y) in Grade" class="form-control"></select>
+		</div>
+		<div class="col-md-3">
+			<lable><b>Serie:</b></lable> <select ng-model="selectSerie" ng-options="y.Text for (x, y) in Serie" class="form-control"></select>
+		</div>
+		<div class="col-md-3">
+			<label><b>Main Category:</b></label> <select ng-model="selectMainCategory" ng-options="y.Text for (x, y) in MainCategory" class="form-control"></select>
+		</div>
+		<div class="col-md-3">
+			<label><b>Sub Category:</b></label> <select ng-model="selectSubCategory" ng-options="y.Text for (x, y) in SubCategory" class="form-control"></select>
+		</div>
+		<hr />
+		<button ng-click="UpdateSelected()" class="btn btn-default">Update selected</button>
+		{{Selected}}
+	</div>
 		<table class="table">
 			<thead>
 				<tr>
@@ -43,10 +60,9 @@
 					<td>{{MnB.SerieName}}</td>
 					<td>{{MnB.MainCategoryName}}</td>
 					<td>{{MnB.SubCategoryName}}</td>
-					<td>{{MnB.UpdateThis}}
-						@*<input data-val="true" data-val-required="The Update Movie/Book field is required." name="[0].UpdateThis" type="checkbox" value="true" />
-						<input name="[0].UpdateThis" type="hidden" value="false" />*@
-
+					<td>
+						<input type="checkbox" ng-model="MnB.UpdateThis">
+						@*MnB.UpdateThis*@
 					</td>
 					<td>
 						<table>
@@ -76,9 +92,18 @@
 
 		angular.module("app").controller("severalUpdateIndexController", function ($scope, ApiService, $window) {
 			$scope.MnBs = null;
+			$scope.Selected = [];
+			$scope.Grade = null;
+			$scope.Serie = null;
+			$scope.MainCategory = null;
+			$scope.SubCategory = null;
 			
 			var onSuccess = function (data) {
 				$scope.MnBs = data.MnBs;
+				$scope.Grade = data.Grade;
+				$scope.MainCategory = data.MainCategory;
+				$scope.Serie = data.Series;
+				$scope.SubCategory = data.SubCategory;
 			};
 
 			var onFail = function (response) {
@@ -90,8 +115,37 @@
 				
 			}
 
+			var onUpdateSuccess = function (data) {
+				alert(data.Id);
+				//$scope.GetSeveralUpdate(); //Maby just fill data instead of do another call
+			};
 
+			var onUpdateFail = function (response) {
+				alert("Misslyckades uppdatera");
+			};
 			
+			$scope.UpdateSelected = function () {
+				//alert("Hej");
+				//alert(JSON.stringify($scope.selected));
+				$scope.Selected = [];
+				angular.forEach($scope.MnBs, function (MnBs) {
+					if (!!MnBs.UpdateThis) $scope.Selected.push(MnBs.Id);
+				});
+				//alert(angular.isUndefined($scope.selectSubCategory) ? "0" : $scope.selectSubCategory.Value);
+
+				ApiService.Get("/MoviesAndBooks/UpdateMeny", onUpdateSuccess, onUpdateFail,
+					{
+						ToUpdate: $scope.Selected,
+						Grade: angular.isUndefined($scope.selectGrade) ? "0" : $scope.selectGrade.Value,
+						Serie: angular.isUndefined($scope.selectSerie) ? "0" : $scope.selectSerie.Value,
+						MainCategory: angular.isUndefined($scope.selectMainCategory) ? "0" : $scope.selectMainCategory.Value,
+						SubCategory: angular.isUndefined($scope.selectSubCategory) ? "0" : $scope.selectSubCategory.Value
+					}
+				);
+				
+				
+			}
+		
 		});
 
 	}());

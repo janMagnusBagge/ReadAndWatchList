@@ -47,11 +47,11 @@ namespace ReadAndWatchList.Controllers
         // GET: MoviesAndBooks/Create
         public ActionResult Create()
         {
-			ViewBag.GradeIdChoices = GradeSelectList();
-			ViewBag.MainCategoryIdChoices = CategorySelectList();
+			//ViewBag.GradeIdChoices = GradeSelectList();
+			//ViewBag.MainCategoryIdChoices = CategorySelectList();
 
-			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			ViewBag.SeriesIdChoices = SeriesSelectList();
+			//ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			//ViewBag.SeriesIdChoices = SeriesSelectList();
 			MoviesAndBooksViewModel model = new MoviesAndBooksViewModel();
 			model.Grade = GradeSelectList();
 			model.MainCategory = CategorySelectList();
@@ -184,40 +184,10 @@ namespace ReadAndWatchList.Controllers
 
 		public ActionResult GetSeveralUpdateData()
 		{
-			//var MnBs = _moviesAndBooksRepo.GetAll()
-			//	.Select(a => new
-			//	{
-			//		a.Id,
-			//		a.Description,
-			//		//a.Grade, //behövs denna?
-			//		a.GradeId,
-			//		//a.MainCategorie,//behövs denna?
-			//		a.MainCategoryId,
-			//		a.Name,
-			//		a.OtherPlatforms,
-			//		a.PartOffSerie,
-			//		a.SerieId,
-			//		//a.Series, //behövs denna?
-			//		//a.SubCategori, //behövs denna?
-			//		a.SubCategoryId
-			//	}
-			//	);
+			
 			var MnBs = _moviesAndBooksRepo.GetAllMultipleUpdateViewModel()
 				.Select(a => new
 				{
-					//a.Id,
-					//a.Description,
-					////a.Grade, //behövs denna?
-					//a.GradeId,
-					////a.MainCategorie,//behövs denna?
-					//a.MainCategoryId,
-					//a.Name,
-					//a.OtherPlatforms,
-					//a.PartOffSerie,
-					//a.SerieId,
-					////a.Series, //behövs denna?
-					////a.SubCategori, //behövs denna?
-					//a.SubCategoryId
 					a.Id,
 					a.Name,
 					a.GradeId,
@@ -231,7 +201,29 @@ namespace ReadAndWatchList.Controllers
 					a.UpdateThis
 				}
 				);
-			return ApiResult.Success(new { MnBs = MnBs });
+			var Grade = GradeSelectList();
+			var MainCategory = CategorySelectList();
+			var Series = SeriesSelectList();
+			var SubCategory = SubCategorySelectList();
+			return ApiResult.Success(new { 
+				MnBs = MnBs,
+				Grade = Grade,
+				MainCategory = MainCategory,
+				Series = Series,
+				SubCategory = SubCategory
+			}
+			);
+		}
+
+		public ActionResult UpdateMeny(List<int> ToUpdate, int? Grade, int? Serie, int? MainCategory = null, int? SubCategory = null)
+		{
+			
+			_moviesAndBooksRepo
+			return ApiResult.Success(new
+			{
+				Id = ToUpdate.FirstOrDefault()
+			}
+			);
 		}
 
 		#region SelectLists
