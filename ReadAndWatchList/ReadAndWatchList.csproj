@@ -223,6 +223,7 @@
     <Content Include="Views\SubCategories\Details.cshtml" />
     <Content Include="Views\SubCategories\Edit.cshtml" />
     <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\MoviesAndBooks\SeveralUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

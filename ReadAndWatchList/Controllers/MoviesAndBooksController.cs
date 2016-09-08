@@ -179,25 +179,58 @@ namespace ReadAndWatchList.Controllers
 
 		public ActionResult SeveralUpdate()
 		{
-			var MnBs = _moviesAndBooksRepo.GetAll()
+			return View();
+		}
+
+		public ActionResult GetSeveralUpdateData()
+		{
+			//var MnBs = _moviesAndBooksRepo.GetAll()
+			//	.Select(a => new
+			//	{
+			//		a.Id,
+			//		a.Description,
+			//		//a.Grade, //behövs denna?
+			//		a.GradeId,
+			//		//a.MainCategorie,//behövs denna?
+			//		a.MainCategoryId,
+			//		a.Name,
+			//		a.OtherPlatforms,
+			//		a.PartOffSerie,
+			//		a.SerieId,
+			//		//a.Series, //behövs denna?
+			//		//a.SubCategori, //behövs denna?
+			//		a.SubCategoryId
+			//	}
+			//	);
+			var MnBs = _moviesAndBooksRepo.GetAllMultipleUpdateViewModel()
 				.Select(a => new
 				{
+					//a.Id,
+					//a.Description,
+					////a.Grade, //behövs denna?
+					//a.GradeId,
+					////a.MainCategorie,//behövs denna?
+					//a.MainCategoryId,
+					//a.Name,
+					//a.OtherPlatforms,
+					//a.PartOffSerie,
+					//a.SerieId,
+					////a.Series, //behövs denna?
+					////a.SubCategori, //behövs denna?
+					//a.SubCategoryId
 					a.Id,
-					a.Description,
-					a.Grade, //behövs denna?
-					a.GradeId,
-					a.MainCategorie,//behövs denna?
-					a.MainCategoryId,
 					a.Name,
-					a.OtherPlatforms,
-					a.PartOffSerie,
+					a.GradeId,
+					a.Grade, //grade.Name,
 					a.SerieId,
-					a.Series, //behövs denna?
-					a.SubCategori, //behövs denna?
-					a.SubCategoryId
+					a.SerieName,//serie.SerieName,
+					a.MainCategoryId,
+					a.MainCategoryName,//main.Name,
+					a.SubCategoriId,
+					a.SubCategoryName,//sub.Name,
+					a.UpdateThis
 				}
 				);
-
 			return ApiResult.Success(new { MnBs = MnBs });
 		}
 

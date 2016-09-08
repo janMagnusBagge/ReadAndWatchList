@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "SeveralUpdate";
+}
+
+<h2>Several Update</h2>
+
+<div class="well-sm">
+	<div class="btn-toolbar">
+		<a href="@Url.Action("Index")" class="btn btn-info btn-lg">Movies/Books list <span class="glyphicon glyphicon-arrow-right"></span></a>
+	</div>
+</div>
+<div ng-controller="severalUpdateIndexController" ng-init="GetSeveralUpdate()">
+	
+		<table class="table">
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Grade
+					</th>
+					<th>
+						Serie
+					</th>
+					<th>
+						Main Category
+					</th>
+					<th>
+						Sub Category
+					</th>
+					<th>
+						Update Movie/Book
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="MnB in MnBs">
+					<td>{{MnB.Name}}</td>
+					<td>{{MnB.Grade}}</td>
+					<td>{{MnB.SerieName}}</td>
+					<td>{{MnB.MainCategoryName}}</td>
+					<td>{{MnB.SubCategoryName}}</td>
+					<td>{{MnB.UpdateThis}}
+						@*<input data-val="true" data-val-required="The Update Movie/Book field is required." name="[0].UpdateThis" type="checkbox" value="true" />
+						<input name="[0].UpdateThis" type="hidden" value="false" />*@
+
+					</td>
+					<td>
+						<table>
+							<tr>
+								<td>
+									<a href="~/MoviesAndBooks/Edit/{{MnB.Id}}" class="btn btn-info btn-sm col-xs-12" title="Edit">Edit <span class="glyphicon glyphicon-edit"></span></a>
+								</td>
+								<td>
+									<a href="~/MoviesAndBooks/Details/{{MnB.Id}}" class="btn btn-warning btn-sm col-xs-12" title="Details">Details <span class="glyphicon glyphicon-expand"></span></a>
+								</td>
+								<td>
+									<a href="~/MoviesAndBooks/Delete/{{MnB.Id}}" class="btn btn-danger btn-sm col-xs-12" title="Remove Movie/Book">Remove <span class="glyphicon glyphicon-remove"></span></a>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+</div>
+
+
+<script>
+
+	(function () {
+
+		angular.module("app").controller("severalUpdateIndexController", function ($scope, ApiService, $window) {
+			$scope.MnBs = null;
+			
+			var onSuccess = function (data) {
+				$scope.MnBs = data.MnBs;
+			};
+
+			var onFail = function (response) {
+				alert("Misslyckades");
+			};
+
+			$scope.GetSeveralUpdate = function () {
+				ApiService.Get("/MoviesAndBooks/GetSeveralUpdateData", onSuccess, onFail);
+				
+			}
+
+
+			
+		});
+
+	}());
+
+</script>
