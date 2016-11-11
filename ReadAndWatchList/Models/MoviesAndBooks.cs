@@ -43,5 +43,8 @@ namespace ReadAndWatchList.Models
         public int? SubCategoryId { get; set; }
         [Display(Name = "Sub Category")]
         public virtual SubCategories SubCategori { get; set; }
+
+
+        public virtual ICollection<ReadingListRow> ReadingListRow { get; set; }
     }
 }

@@ -134,11 +134,17 @@
     <Compile Include="Migrations\201609070812220_InitialCreate.Designer.cs">
       <DependentUpon>201609070812220_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611112107072_AddReadingList.cs" />
+    <Compile Include="Migrations\201611112107072_AddReadingList.Designer.cs">
+      <DependentUpon>201611112107072_AddReadingList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BetweenSubMainCategory.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Grades.cs" />
     <Compile Include="Models\MoviesAndBooks.cs" />
+    <Compile Include="Models\ReadingList.cs" />
+    <Compile Include="Models\ReadingListRow.cs" />
     <Compile Include="Models\Series.cs" />
     <Compile Include="Models\Similar.cs" />
     <Compile Include="Models\SubCategories.cs" />
@@ -238,6 +244,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201609070812220_InitialCreate.resx">
       <DependentUpon>201609070812220_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611112107072_AddReadingList.resx">
+      <DependentUpon>201611112107072_AddReadingList.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
