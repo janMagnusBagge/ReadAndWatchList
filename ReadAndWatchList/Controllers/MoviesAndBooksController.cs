@@ -230,35 +230,26 @@ namespace ReadAndWatchList.Controllers
 		private SelectList GradeSelectList(int? id = null)
 		{
 			GradesRepository _gradeRepo = new GradesRepository();
-			var items = _gradeRepo.GetAll();
-            //return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-            //nedan användes innan ändring 2016-10-15
-            //return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text",items.FirstOrDefault(e => e.Id == id));
             return _gradeRepo.GetAllForSelectList();
 
         }
 		private SelectList CategorySelectList(int? id = null)
 		{
 			CategoriesRepository _categoryRepo = new CategoriesRepository();
-			var items = _categoryRepo.GetAll();
-			//return new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
-			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
-		}
+            return _categoryRepo.GetAllForSelectList();
+        }
 
 		private SelectList SubCategorySelectList(int? id = null)
 		{
 			SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
 			var items = _subCategoryRepo.GetAll();
-			//return new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoryId = g.Id, Name = g.Name }), "SubCategoryId", "Name");
-			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
-		}
+            return _subCategoryRepo.GetAllForSelectList();
+        }
 		private SelectList SeriesSelectList(int? id = null)
 		{
 			SeriesRepository _seriesRepo = new SeriesRepository();
-			var items = _seriesRepo.GetAll();
-			//return new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
-			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.SerieName }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
-		}
+            return _seriesRepo.GetAllForSelectList();
+        }
 		#endregion
     }
 }

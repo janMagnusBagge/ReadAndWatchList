@@ -26,7 +26,7 @@ namespace ReadAndWatchList.Repositories
 
         public SelectList GetAllForSelectList()
         {
-            SelectListViewModel item = new SelectListViewModel { Value = 0, Text = "Select to update to" };
+            SelectListViewModel item = new SelectListViewModel { Value = 0, Text = "Select grade to update to" };
             List<SelectListViewModel> items = new List<SelectListViewModel>();
             items.Add(item);
             items.AddRange(_db.Grade.Select(a => new SelectListViewModel { Value = a.Id, Text = a.Name }));

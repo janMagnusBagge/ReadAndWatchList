@@ -1,10 +1,12 @@
 ﻿using ReadAndWatchList.DataAccessLayer;
 using ReadAndWatchList.Models;
+using ReadAndWatchList.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ReadAndWatchList.Repositories
 {
@@ -21,7 +23,17 @@ namespace ReadAndWatchList.Repositories
             return _db.SubCategorie.ToList();
             //return books;
         }
+        public SelectList GetAllForSelectList()
+        {
+            SelectListViewModel item = new SelectListViewModel { Value = 0, Text = "Select category to update to" };
+            List<SelectListViewModel> items = new List<SelectListViewModel>();
+            items.Add(item);
+            items.AddRange(_db.SubCategorie.Select(a => new SelectListViewModel { Value = a.Id, Text = a.Name }));
 
+            SelectList returnSelect = new SelectList(items.Select(g => new { Value = g.Value, Text = g.Text }), "Value", "Text", 0);
+
+            return returnSelect;
+        }
         public SubCategories GetSpecifik(int? id)
         {
 

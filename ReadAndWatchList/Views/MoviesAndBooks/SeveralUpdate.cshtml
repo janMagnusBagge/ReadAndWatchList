@@ -14,16 +14,20 @@
 	
 	<div>
 		<div class="col-md-3">
-			<label><b>Grade:</b></label> <select ng-model="selectGrade" ng-options="y.Text for (x, y) in Grade" ng-init="selectGrade = options[0].Value" class="form-control"></select>
+			<label><b>Grade:</b></label> <select ng-model="selectGrade" ng-options="item as item.Text for item in Grade" ng-init="selectGrade = options[1].Value" class="form-control"></select>
 		</div>
-		<div class="col-md-3">
+		@*<div class="col-md-3">
 			<lable><b>Serie:</b></lable> <select ng-model="selectSerie" ng-options="y.Text for (x, y) in Serie" class="form-control"></select>
+		</div>*@
+        <div class="col-md-3">
+            <lable><b>Serie:</b></lable> <select ng-model="selectSerie" ng-options="item as item.Text for item in Serie"  class="form-control"></select>
+            <pre>{{selectSerie | json}}</pre>
+        </div>
+		<div class="col-md-3">
+			<label><b>Main Category:</b></label> <select ng-model="selectMainCategory" ng-options="item as item.Text for item in MainCategory" class="form-control"></select>
 		</div>
 		<div class="col-md-3">
-			<label><b>Main Category:</b></label> <select ng-model="selectMainCategory" ng-options="y.Text for (x, y) in MainCategory" class="form-control"></select>
-		</div>
-		<div class="col-md-3">
-			<label><b>Sub Category:</b></label> <select ng-model="selectSubCategory" ng-options="y.Text for (x, y) in SubCategory" class="form-control"></select>
+			<label><b>Sub Category:</b></label> <select ng-model="selectSubCategory" ng-options="item as item.Text for item in SubCategory" class="form-control"></select>
 		</div>
 		<hr />
 		<button ng-click="UpdateSelected()" class="btn btn-default">Update selected</button>
@@ -104,6 +108,12 @@
 				$scope.MainCategory = data.MainCategory;
 				$scope.Serie = data.Series;
 				$scope.SubCategory = data.SubCategory;
+
+                //default values for selects / dropdowns
+				$scope.selectGrade = $scope.Grade[0];
+				$scope.selectMainCategory = $scope.MainCategory[0];
+				$scope.selectSerie = $scope.Serie[0];
+				$scope.selectSubCategory = $scope.SubCategory[0];
 			};
 
 			var onFail = function (response) {
