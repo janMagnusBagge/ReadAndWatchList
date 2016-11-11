@@ -17,6 +17,7 @@ namespace ReadAndWatchList.Repositories
             _db = new ReadAndWatchContext();
         }
 
+        #region hämtaRader
         public IEnumerable<MoviesAndBooks> GetAll()
         {
             return _db.MovieAndBook.ToList();
@@ -30,7 +31,7 @@ namespace ReadAndWatchList.Repositories
             join main in _db.Categorie on mab.MainCategoryId equals main.Id into mainCateJoin
             from mainCategory in mainCateJoin.DefaultIfEmpty()
 
-            join sub in _db.SubCategorie on mab.MainCategoryId equals sub.Id into subCateJoin
+            join sub in _db.SubCategorie on mab.SubCategoryId equals sub.Id into subCateJoin
             from subCategory in subCateJoin.DefaultIfEmpty()
 
             join grade in _db.Grade on mab.GradeId equals grade.Id into gradeJoin
@@ -65,7 +66,9 @@ namespace ReadAndWatchList.Repositories
 
             return _db.MovieAndBook.Find(id);
         }
-
+        #endregion
+        #region CRUD
+        #region skapaRader
         //ändra så att man returnerar true om man lyckades och få meddelande om det
         public void Create(MoviesAndBooks movieAndBook)
         {
@@ -74,7 +77,7 @@ namespace ReadAndWatchList.Repositories
             _db.SaveChanges();
             //return true;
         }
-
+        
         public void Create(string Name, string Description, string OtherPlatforms, int? GradeId, bool PartOffSerie, int? SerieId, int? MainCategoryId, int? SubCategoriId)
         {
 
@@ -89,7 +92,8 @@ namespace ReadAndWatchList.Repositories
             _MoviesAndBooks.SubCategoryId = SubCategoriId;
             Create(_MoviesAndBooks);
         }
-        
+        #endregion
+        #region uppdatera
         public void Edit(MoviesAndBooks movieAndBook)
         {
             _db.Entry(movieAndBook).State = EntityState.Modified;
@@ -112,6 +116,32 @@ namespace ReadAndWatchList.Repositories
             Edit(_MoviesAndBooks);
         }
 
+        public bool UpdateMeny(List<int> ToUpdate, int? Grade, int? Serie, int? MainCategory = null, int? SubCategory = null)
+        {
+            var doSave = false;
+            if(Grade == null && Serie == null && MainCategory == null && SubCategory == null)
+            {
+                return false;
+            }
+            foreach(var id in ToUpdate)
+            {
+                var rowToUpdate = GetSpecifik(id);
+                if(rowToUpdate != null)
+                {
+                    rowToUpdate.GradeId = (Grade != null && Grade != 0 ? Grade : rowToUpdate.GradeId);
+                    rowToUpdate.SerieId = (Serie != null && Serie != 0 ? Serie : rowToUpdate.SerieId);
+                    rowToUpdate.MainCategoryId = (MainCategory != null && MainCategory != 0 ? MainCategory : rowToUpdate.MainCategoryId);
+                    rowToUpdate.SubCategoryId = (SubCategory != null && SubCategory != 0 ? SubCategory : rowToUpdate.SubCategoryId);
+                    _db.Entry(rowToUpdate).State = EntityState.Modified;
+                    doSave = true;
+                }
+            }
+            if(doSave)
+                _db.SaveChanges();
+            return true;
+        }
+        #endregion
+
         //kanske ska göra så att man returnerar bool
         //och sedan använda att man lyckades ta bort
         public bool Delete(int id)
@@ -125,5 +155,7 @@ namespace ReadAndWatchList.Repositories
             }
             return false;
         }
+        #endregion
+
     }
 }

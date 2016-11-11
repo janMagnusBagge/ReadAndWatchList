@@ -217,13 +217,13 @@ namespace ReadAndWatchList.Controllers
 
 		public ActionResult UpdateMeny(List<int> ToUpdate, int? Grade, int? Serie, int? MainCategory = null, int? SubCategory = null)
 		{
-			
-			_moviesAndBooksRepo
-			return ApiResult.Success(new
-			{
-				Id = ToUpdate.FirstOrDefault()
-			}
-			);
+
+            if(_moviesAndBooksRepo.UpdateMeny(ToUpdate, Grade, Serie, MainCategory, SubCategory) == true)
+            {
+                return GetSeveralUpdateData();
+            }
+
+            return ApiResult.Fail("Could not update");
 		}
 
 		#region SelectLists
@@ -231,9 +231,12 @@ namespace ReadAndWatchList.Controllers
 		{
 			GradesRepository _gradeRepo = new GradesRepository();
 			var items = _gradeRepo.GetAll();
-			//return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-			return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text",items.FirstOrDefault(e => e.Id == id));
-		}
+            //return new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
+            //nedan användes innan ändring 2016-10-15
+            //return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text",items.FirstOrDefault(e => e.Id == id));
+            return _gradeRepo.GetAllForSelectList();
+
+        }
 		private SelectList CategorySelectList(int? id = null)
 		{
 			CategoriesRepository _categoryRepo = new CategoriesRepository();

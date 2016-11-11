@@ -14,7 +14,7 @@
 	
 	<div>
 		<div class="col-md-3">
-			<label><b>Grade:</b></label> <select ng-model="selectGrade" ng-options="y.Text for (x, y) in Grade" class="form-control"></select>
+			<label><b>Grade:</b></label> <select ng-model="selectGrade" ng-options="y.Text for (x, y) in Grade" ng-init="selectGrade = options[0].Value" class="form-control"></select>
 		</div>
 		<div class="col-md-3">
 			<lable><b>Serie:</b></lable> <select ng-model="selectSerie" ng-options="y.Text for (x, y) in Serie" class="form-control"></select>
@@ -116,7 +116,13 @@
 			}
 
 			var onUpdateSuccess = function (data) {
-				alert(data.Id);
+			    //alert(data.Id);
+			    $scope.MnBs = data.MnBs;
+			    $scope.Grade = data.Grade;
+			    $scope.MainCategory = data.MainCategory;
+			    $scope.Serie = data.Series;
+			    $scope.SubCategory = data.SubCategory;
+			    //$state.reload();
 				//$scope.GetSeveralUpdate(); //Maby just fill data instead of do another call
 			};
 

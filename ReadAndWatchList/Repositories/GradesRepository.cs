@@ -1,5 +1,6 @@
 ﻿using ReadAndWatchList.DataAccessLayer;
 using ReadAndWatchList.Models;
+using ReadAndWatchList.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -20,6 +21,21 @@ namespace ReadAndWatchList.Repositories
         public IEnumerable<Grades> GetAll()
         {
             return _db.Grade.ToList();
+            //return books;
+        }
+
+        public SelectList GetAllForSelectList()
+        {
+            SelectListViewModel item = new SelectListViewModel { Value = 0, Text = "Select to update to" };
+            List<SelectListViewModel> items = new List<SelectListViewModel>();
+            items.Add(item);
+            items.AddRange(_db.Grade.Select(a => new SelectListViewModel { Value = a.Id, Text = a.Name }));
+
+            SelectList returnSelect = new SelectList(items.Select(g => new { Value = g.Value, Text = g.Text }), "Value", "Text",0);
+
+            return returnSelect;
+            //return new SelectList(items.Select(g => new { Value = g.Id, Text = g.Name }), "Value", "Text", items.FirstOrDefault(e => e.Id == id));
+            //return _db.Grade.ToList();
             //return books;
         }
 

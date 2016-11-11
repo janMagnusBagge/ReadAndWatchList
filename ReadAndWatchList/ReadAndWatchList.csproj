@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -150,6 +151,7 @@
     <Compile Include="Repositories\SubCategoriesRepository.cs" />
     <Compile Include="ViewModels\MoviesAndBooksViewModel.cs" />
     <Compile Include="ViewModels\MultipleUpdateMoviesAndBooksViewModel.cs" />
+    <Compile Include="ViewModels\SelectListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ReadAndWatch.mdf" />
