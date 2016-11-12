@@ -47,11 +47,6 @@ namespace ReadAndWatchList.Controllers
         // GET: MoviesAndBooks/Create
         public ActionResult Create()
         {
-			//ViewBag.GradeIdChoices = GradeSelectList();
-			//ViewBag.MainCategoryIdChoices = CategorySelectList();
-
-			//ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			//ViewBag.SeriesIdChoices = SeriesSelectList();
 			MoviesAndBooksViewModel model = new MoviesAndBooksViewModel();
 			model.Grade = GradeSelectList();
 			model.MainCategory = CategorySelectList();
@@ -63,22 +58,17 @@ namespace ReadAndWatchList.Controllers
         // POST: MoviesAndBooks/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "Name,Description,OtherPlatforms,GradeId,PartOffSerie,SerieId,MainCategoryId,SubCategoriId")] MoviesAndBooks MoviesAndBooks)
-        public ActionResult Create(string Name = "", string Description = "",string OtherPlatforms = "",int? GradeId = null,bool PartOffSerie = false,int? SerieId = null,int? MainCategoryId = null,int? SubCategoryId = null)
+        //public ActionResult Create(string Name = "", string Description = "",string OtherPlatforms = "",int? GradeId = null,bool PartOffSerie = false,int? SerieId = null,int? MainCategoryId = null,int? SubCategoryId = null)
+        public ActionResult Create(MoviesAndBooksViewModel model)
         {
-			ViewBag.GradeIdChoices = GradeSelectList();
-			ViewBag.MainCategoryIdChoices = CategorySelectList();
-
-			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			ViewBag.SeriesIdChoices = SeriesSelectList();
-            
             if (ModelState.IsValid)
-                {
-                    _moviesAndBooksRepo.Create(Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoryId);
-                    return RedirectToAction("Index");
-                }
+            {
+                //_moviesAndBooksRepo.Create(Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoryId);
+                _moviesAndBooksRepo.Create(model);
+                return RedirectToAction("Index");
+            }
 
-                return View();
+                return View(model);
             
         }
 
@@ -89,44 +79,41 @@ namespace ReadAndWatchList.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MoviesAndBooks _moviesAndBooks = _moviesAndBooksRepo.GetSpecifik(id); //= bookRepo.GetSpecifikBook(id);
+            MoviesAndBooksViewModel _moviesAndBooks = _moviesAndBooksRepo.GetSpecifikForMoviesAndBooksViewModel(id);//MoviesAndBooks _moviesAndBooks = _moviesAndBooksRepo.GetSpecifik(id); //= bookRepo.GetSpecifikBook(id);
             if (_moviesAndBooks == null)
             {
                 return HttpNotFound();
             }
+            _moviesAndBooks.Grade = GradeSelectList();
+            _moviesAndBooks.MainCategory = CategorySelectList();
+            _moviesAndBooks.Series = SeriesSelectList();
+            _moviesAndBooks.SubCategory = SubCategorySelectList();
+            //ViewBag.GradeIdChoices = GradeSelectList();
+            //ViewBag.MainCategoryIdChoices = CategorySelectList();
 
-			ViewBag.GradeIdChoices = GradeSelectList();
-			ViewBag.MainCategoryIdChoices = CategorySelectList();
-
-			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			ViewBag.SeriesIdChoices = SeriesSelectList();
+            //ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+            //ViewBag.SeriesIdChoices = SeriesSelectList();
             return View(_moviesAndBooks);
         }
 
         // POST: MoviesAndBooks/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int Id,string Name = "", string Description = "", string OtherPlatforms = "", int? GradeId = null, bool PartOffSerie = false, int? SerieId = null, int? MainCategoryId = null, int? SubCategoriId = null)
+        //public ActionResult Edit(int Id,string Name = "", string Description = "", string OtherPlatforms = "", int? GradeId = null, bool PartOffSerie = false, int? SerieId = null, int? MainCategoryId = null, int? SubCategoriId = null)
+        public ActionResult Edit(MoviesAndBooksViewModel model)
         {
-			//GradesRepository _gradeRepo = new GradesRepository();
-			//ViewBag.GradeIdChoices = new SelectList(_gradeRepo.GetAll().Select(g => new { GradeId = g.Id, Name = g.Name }), "GradeId", "Name");
-			//CategoriesRepository _categoryRepo = new CategoriesRepository();
-			//ViewBag.MainCategoryIdChoices = new SelectList(_categoryRepo.GetAll().Select(g => new { MainCategoryId = g.Id, Name = g.Name }), "MainCategoryId", "Name");
-			//SubCategoriesRepository _subCategoryRepo = new SubCategoriesRepository();
-			//ViewBag.SubCategoryIdChoices = new SelectList(_subCategoryRepo.GetAll().Select(g => new { SubCategoriId = g.Id, Name = g.Name }), "SubCategoriId", "Name");
-			//SeriesRepository _seriesRepo = new SeriesRepository();
-			//ViewBag.SeriesIdChoices = new SelectList(_seriesRepo.GetAll().Select(g => new { SerieId = g.Id, Name = g.SerieName }), "SerieId", "Name");
-			ViewBag.GradeIdChoices = GradeSelectList();
-			ViewBag.MainCategoryIdChoices = CategorySelectList();
+			//ViewBag.GradeIdChoices = GradeSelectList();
+			//ViewBag.MainCategoryIdChoices = CategorySelectList();
 
-			ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			ViewBag.SeriesIdChoices = SeriesSelectList();
+			//ViewBag.SubCategoryIdChoices = SubCategorySelectList();
+			//ViewBag.SeriesIdChoices = SeriesSelectList();
                 if (ModelState.IsValid)
                 {
-                    _moviesAndBooksRepo.Edit(Id,Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
+                    //_moviesAndBooksRepo.Edit(Id,Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
+                    _moviesAndBooksRepo.Edit(model);
                     return RedirectToAction("Index");
                 }
-                return View();
+                return View(model);
 
         }
 

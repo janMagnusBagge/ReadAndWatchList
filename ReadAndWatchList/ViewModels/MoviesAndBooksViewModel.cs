@@ -17,17 +17,20 @@ namespace ReadAndWatchList.ViewModels
 		public bool PartOffSerie { get; set; }
 		public string WhatSerieName { get; set; }
 
-
-		[Display(Name = "Grade")]
+        public int? GradeId { get; set; }
+        [Display(Name = "Grade")]
 		public IEnumerable<System.Web.Mvc.SelectListItem> Grade { get; set; }
 
-		[Display(Name = "Serie")]
+        public int? SerieId { get; set; }
+        [Display(Name = "Serie")]
 		public IEnumerable<System.Web.Mvc.SelectListItem> Series { get; set; }
 
-		[Display(Name = "Main Category")]
+        public int? MainCategoryId { get; set; }
+        [Display(Name = "Main Category")]
 		public IEnumerable<System.Web.Mvc.SelectListItem> MainCategory { get; set; }
 
-		[Display(Name = "Sub Category")]
+        public int? SubCategoryId { get; set; }
+        [Display(Name = "Sub Category")]
 		public IEnumerable<System.Web.Mvc.SelectListItem> SubCategory { get; set; }
 	}
 }

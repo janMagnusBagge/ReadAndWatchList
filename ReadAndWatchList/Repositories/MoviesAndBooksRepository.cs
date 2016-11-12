@@ -66,6 +66,35 @@ namespace ReadAndWatchList.Repositories
 
             return _db.MovieAndBook.Find(id);
         }
+        public MoviesAndBooksViewModel GetSpecifikForMoviesAndBooksViewModel(int? id)
+        {
+
+            if (id == null)
+            {
+                return null;
+            }
+
+            var foundInDb = _db.MovieAndBook.Find(id);
+            if (foundInDb != null)
+            {
+                MoviesAndBooksViewModel returnModel = new MoviesAndBooksViewModel()
+                {
+                    Id = foundInDb.Id,
+                    Description = foundInDb.Description,
+                    Name = foundInDb.Name,
+                    OtherPlatforms = foundInDb.OtherPlatforms,
+                    PartOffSerie = foundInDb.PartOffSerie,
+                    WhatSerieName = foundInDb.WhatSerieName,
+                    GradeId = foundInDb.GradeId,
+                    MainCategoryId = foundInDb.MainCategoryId,
+                    SubCategoryId = foundInDb.SubCategoryId,
+                    SerieId = foundInDb.SerieId
+                };
+                return returnModel;
+            }
+            else
+                return null;
+        }
         #endregion
         #region CRUD
         #region skapaRader
@@ -77,7 +106,20 @@ namespace ReadAndWatchList.Repositories
             _db.SaveChanges();
             //return true;
         }
-        
+        public void Create(MoviesAndBooksViewModel movieAndBook)
+        {
+            
+            MoviesAndBooks _MoviesAndBooks = new MoviesAndBooks();
+            _MoviesAndBooks.Name = movieAndBook.Name;
+            _MoviesAndBooks.Description = movieAndBook.Description;
+            _MoviesAndBooks.OtherPlatforms = movieAndBook.OtherPlatforms;
+            _MoviesAndBooks.GradeId = movieAndBook.GradeId;
+            _MoviesAndBooks.PartOffSerie = movieAndBook.PartOffSerie;
+            _MoviesAndBooks.SerieId = movieAndBook.SerieId;
+            _MoviesAndBooks.MainCategoryId = movieAndBook.MainCategoryId;
+            _MoviesAndBooks.SubCategoryId = movieAndBook.SubCategoryId;
+            Create(_MoviesAndBooks);
+        }
         public void Create(string Name, string Description, string OtherPlatforms, int? GradeId, bool PartOffSerie, int? SerieId, int? MainCategoryId, int? SubCategoriId)
         {
 
@@ -99,7 +141,19 @@ namespace ReadAndWatchList.Repositories
             _db.Entry(movieAndBook).State = EntityState.Modified;
             _db.SaveChanges();
         }
-
+        public void Edit(MoviesAndBooksViewModel movieAndBook)
+        {
+            MoviesAndBooks _MoviesAndBooks = _db.MovieAndBook.Find(movieAndBook.Id);
+            _MoviesAndBooks.Name = movieAndBook.Name;
+            _MoviesAndBooks.Description = movieAndBook.Description;
+            _MoviesAndBooks.OtherPlatforms = movieAndBook.OtherPlatforms;
+            _MoviesAndBooks.GradeId = movieAndBook.GradeId;
+            _MoviesAndBooks.PartOffSerie = movieAndBook.PartOffSerie;
+            _MoviesAndBooks.SerieId = movieAndBook.SerieId;
+            _MoviesAndBooks.MainCategoryId = movieAndBook.MainCategoryId;
+            _MoviesAndBooks.SubCategoryId = movieAndBook.SubCategoryId;
+            Edit(_MoviesAndBooks);
+        }
         public void Edit(int Id, string Name, string Description, string OtherPlatforms, int? GradeId, bool PartOffSerie, int? SerieId, int? MainCategoryId, int? SubCategoriId)
         {
 
