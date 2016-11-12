@@ -21,6 +21,9 @@ namespace ReadAndWatchList.DataAccessLayer
         public DbSet<Models.Series> Serie { get; set; }
         public DbSet<Models.Similar> Similar { get; set; }
         public DbSet<Models.BetweenSubMainCategory> BetweenCategory { get; set; }
+        public DbSet<Models.ReadingList> ReadingList { get; set; }
+        public DbSet<Models.ReadingListRow> ReadingListRow { get; set; }
+        
 
         //public System.Data.Entity.DbSet<ReadAndWatchList.ViewModels.MultipleUpdateMoviesAndBooksViewModel> MultipleUpdateMoviesAndBooksViewModels { get; set; }
     }

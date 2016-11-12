@@ -124,6 +124,7 @@
     <Compile Include="Controllers\GradesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MoviesAndBooksController.cs" />
+    <Compile Include="Controllers\ReadingListController.cs" />
     <Compile Include="Controllers\SeriesController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="DataAccessLayer\ReadAndWatchContext.cs" />
@@ -232,6 +233,7 @@
     <Content Include="Views\SubCategories\Edit.cshtml" />
     <Content Include="Views\SubCategories\Index.cshtml" />
     <Content Include="Views\MoviesAndBooks\SeveralUpdate.cshtml" />
+    <Content Include="Views\ReadingList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
