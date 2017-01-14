@@ -159,6 +159,7 @@
     <Compile Include="Repositories\SubCategoriesRepository.cs" />
     <Compile Include="ViewModels\MoviesAndBooksViewModel.cs" />
     <Compile Include="ViewModels\MultipleUpdateMoviesAndBooksViewModel.cs" />
+    <Compile Include="ViewModels\ReadingListViewModel.cs" />
     <Compile Include="ViewModels\SelectListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

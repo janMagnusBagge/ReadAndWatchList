@@ -13,13 +13,8 @@ namespace ReadAndWatchList.Controllers
 {
     public class MoviesAndBooksController : Controller
     {
-        //// GET: MoviesAndBooks
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        public MoviesAndBooksRepository _moviesAndBooksRepo = new MoviesAndBooksRepository();
+        
+        private MoviesAndBooksRepository _moviesAndBooksRepo = new MoviesAndBooksRepository();
 
         // GET: MoviesAndBooks
         public ActionResult Index()
