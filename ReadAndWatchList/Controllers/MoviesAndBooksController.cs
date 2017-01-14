@@ -88,11 +88,7 @@ namespace ReadAndWatchList.Controllers
             _moviesAndBooks.MainCategory = CategorySelectList();
             _moviesAndBooks.Series = SeriesSelectList();
             _moviesAndBooks.SubCategory = SubCategorySelectList();
-            //ViewBag.GradeIdChoices = GradeSelectList();
-            //ViewBag.MainCategoryIdChoices = CategorySelectList();
 
-            //ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-            //ViewBag.SeriesIdChoices = SeriesSelectList();
             return View(_moviesAndBooks);
         }
 
@@ -102,11 +98,6 @@ namespace ReadAndWatchList.Controllers
         //public ActionResult Edit(int Id,string Name = "", string Description = "", string OtherPlatforms = "", int? GradeId = null, bool PartOffSerie = false, int? SerieId = null, int? MainCategoryId = null, int? SubCategoriId = null)
         public ActionResult Edit(MoviesAndBooksViewModel model)
         {
-			//ViewBag.GradeIdChoices = GradeSelectList();
-			//ViewBag.MainCategoryIdChoices = CategorySelectList();
-
-			//ViewBag.SubCategoryIdChoices = SubCategorySelectList();
-			//ViewBag.SeriesIdChoices = SeriesSelectList();
                 if (ModelState.IsValid)
                 {
                     //_moviesAndBooksRepo.Edit(Id,Name, Description, OtherPlatforms, GradeId, PartOffSerie, SerieId, MainCategoryId, SubCategoriId);
@@ -148,13 +139,13 @@ namespace ReadAndWatchList.Controllers
                 return View();
             }
         }
-
+        //First try att uppdating meny at same time but abbandond
         public ActionResult MultipleUpdate()
         {
             var model = _moviesAndBooksRepo.GetAllMultipleUpdateViewModel().ToList();
             return View(model);
         }
-
+        //First try att uppdating meny at same time but abbandond
         [HttpPost]
         public ActionResult MultipleUpdate(List<MultipleUpdateMoviesAndBooksViewModel> model)
         {

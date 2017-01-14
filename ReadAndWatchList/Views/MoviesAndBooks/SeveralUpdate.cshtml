@@ -21,7 +21,7 @@
 		</div>*@
         <div class="col-md-3">
             <lable><b>Serie:</b></lable> <select ng-model="selectSerie" ng-options="item as item.Text for item in Serie"  class="form-control"></select>
-            <pre>{{selectSerie | json}}</pre>
+            @*<pre>{{selectSerie | json}}</pre>*@
         </div>
 		<div class="col-md-3">
 			<label><b>Main Category:</b></label> <select ng-model="selectMainCategory" ng-options="item as item.Text for item in MainCategory" class="form-control"></select>
@@ -31,7 +31,6 @@
 		</div>
 		<hr />
 		<button ng-click="UpdateSelected()" class="btn btn-default">Update selected</button>
-		{{Selected}}
 	</div>
 		<table class="table">
 			<thead>
@@ -126,14 +125,11 @@
 			}
 
 			var onUpdateSuccess = function (data) {
-			    //alert(data.Id);
 			    $scope.MnBs = data.MnBs;
 			    $scope.Grade = data.Grade;
 			    $scope.MainCategory = data.MainCategory;
 			    $scope.Serie = data.Series;
 			    $scope.SubCategory = data.SubCategory;
-			    //$state.reload();
-				//$scope.GetSeveralUpdate(); //Maby just fill data instead of do another call
 			};
 
 			var onUpdateFail = function (response) {
@@ -141,13 +137,10 @@
 			};
 			
 			$scope.UpdateSelected = function () {
-				//alert("Hej");
-				//alert(JSON.stringify($scope.selected));
 				$scope.Selected = [];
 				angular.forEach($scope.MnBs, function (MnBs) {
 					if (!!MnBs.UpdateThis) $scope.Selected.push(MnBs.Id);
 				});
-				//alert(angular.isUndefined($scope.selectSubCategory) ? "0" : $scope.selectSubCategory.Value);
 
 				ApiService.Get("/MoviesAndBooks/UpdateMeny", onUpdateSuccess, onUpdateFail,
 					{

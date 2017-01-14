@@ -154,6 +154,7 @@
     <Compile Include="Repositories\CategoriesRepository.cs" />
     <Compile Include="Repositories\GradesRepository.cs" />
     <Compile Include="Repositories\MoviesAndBooksRepository.cs" />
+    <Compile Include="Repositories\ReadingListRepository.cs" />
     <Compile Include="Repositories\SeriesRepository.cs" />
     <Compile Include="Repositories\SubCategoriesRepository.cs" />
     <Compile Include="ViewModels\MoviesAndBooksViewModel.cs" />
