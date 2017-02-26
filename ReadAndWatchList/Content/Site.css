@@ -71,7 +71,7 @@ overflow-y: auto; /*for vertical scroll bar*/
 {
     overflow: hidden;
 }
-.maxHeight300
+.maxHeight200
 {
-    max-height: 300px;
+    max-height: 200px;
 }

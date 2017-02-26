@@ -67,27 +67,24 @@
             </div>
             <div class="modal-body">
                 
-                <div class="overflowHidden well">
-                    <div class="vscrollbar maxHeight300">
-                        @foreach (var item in @Model.ReadingListRowsForCreate)
-                        {
-                            <div class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        @item.Name
-                                    </div>
-                                    <div class="col-xs-6">
-                                        @item.Description
-                                    </div>
-                                    <div class="col-xs-12">
+                <div class="vscrollbar maxHeight200 well">
+                    @foreach (var item in @Model.ReadingListRowsForCreate)
+                    {
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    @item.Name
+                                </div>
+                                <div class="col-xs-6">
+                                    @item.Description
+                                </div>
+                                <div class="col-xs-12">
 
-                                    </div>
                                 </div>
                             </div>
+                        </div>
 
-                        }
-                    </div>
-
+                    }
                 </div>
 
             </div>
