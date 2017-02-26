@@ -75,3 +75,10 @@ overflow-y: auto; /*for vertical scroll bar*/
 {
     max-height: 200px;
 }
+
+/*#booksAndMoviesForList > div:nth-of-type(even) {
+    background: #e0e0e0;
+}*/
+#booksAndMoviesForList > div:nth-of-type(odd) {
+    background: #e0e0e0;
+}
