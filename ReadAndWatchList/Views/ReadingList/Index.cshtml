@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReadAndWatchList.ViewModels.ReadingListViewModel>
+﻿@model ReadAndWatchList.ViewModels.ReadingListViewModel
 
 
 <p>
@@ -10,15 +10,16 @@
         <tr>
 
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.ReadingLists[0].Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.ReadingLists[0].Description)
             </th>
             <th></th>
         </tr>
     </thead>
-    @foreach (var item in Model)
+    
+    @foreach (var item in @Model.ReadingLists)
     {
         <tbody>
             <tr>
@@ -66,6 +67,29 @@
             </div>
             <div class="modal-body">
                 
+                <div class="overflowHidden well">
+                    <div class="vscrollbar maxHeight300">
+                        @foreach (var item in @Model.ReadingListRowsForCreate)
+                        {
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        @item.Name
+                                    </div>
+                                    <div class="col-xs-6">
+                                        @item.Description
+                                    </div>
+                                    <div class="col-xs-12">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

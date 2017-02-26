@@ -8,14 +8,19 @@ namespace ReadAndWatchList.ViewModels
 {
     public class ReadingListViewModel
     {
+        [Display(Name = "Movies and books")]
+        public IList<ReadingListDetailViewModel> ReadingLists { get; set; } = new List<ReadingListDetailViewModel>();
+        [Display(Name = "Movies and books")]
+        public IList<ReadingListSelectMoviesAndBooksRowViewModel> ReadingListRowsForCreate { get; set; } = new List<ReadingListSelectMoviesAndBooksRowViewModel>();
+    }
+    public class ReadingListDetailViewModel
+    {
         public int Id { get; set; }
         [Display(Name = "Name")]
         public string Name { get; set; }
         [Display(Name = "Description")]
         public string Description { get; set; }
-
-        [Display(Name = "Movies and books")]
-        public IEnumerable<ReadingListSelectMoviesAndBooksRowViewModel> ReadingListRowsForCreate { get; set; } = new List<ReadingListSelectMoviesAndBooksRowViewModel>();
+        
     }
 
     public class ReadingListSelectMoviesAndBooksRowViewModel

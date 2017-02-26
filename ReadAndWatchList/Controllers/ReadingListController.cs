@@ -25,16 +25,20 @@ namespace ReadAndWatchList.Controllers
                     CategoryName = x.MainCategorie.Name + " / " + x.SubCategori.Name,
                     SerieName = x.Series.SerieName,
                     AuthorName = "" //Ej implementerat än
-                });
-            var model = _ReadingListRepo.GetAll()
-                .Select(a => new ReadingListViewModel
+                }).ToList();
+            var modelReadingList = _ReadingListRepo.GetAll()
+                .Select(a => new ReadingListDetailViewModel
                 {
                     Id = a.Id,
                     Name = a.Name,
-                    Description = a.Description,
-                    ReadingListRowsForCreate = modelRowsForCreate
+                    Description = a.Description
                 }
-                );
+                ).ToList();
+            var model = new ReadingListViewModel
+            {
+                ReadingLists = modelReadingList,
+                ReadingListRowsForCreate = modelRowsForCreate
+            };
             return View(model);
         }
 
@@ -42,7 +46,7 @@ namespace ReadAndWatchList.Controllers
         {
 
             var readingList = _ReadingListRepo.GetAll()
-                .Select(a => new ReadingListViewModel
+                .Select(a => new ReadingListDetailViewModel
                 {
                     Id = a.Id,
                     Name = a.Name,
