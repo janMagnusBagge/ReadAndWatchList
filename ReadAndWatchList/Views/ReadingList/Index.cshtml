@@ -68,16 +68,24 @@
             <div class="modal-body">
                 
                 <div id="booksAndMoviesForList" class="vscrollbar maxHeight200 well">
+                    <div class="row">
+                        <div class="col-xs-5">
+                            @Model.ReadingListRowsForCreate.FirstOrDefault().Name
+                        </div>
+                        <div class="col-xs-5">
+                            @Model.ReadingListRowsForCreate.FirstOrDefault().Description
+                        </div>
+                    </div>
                     @foreach (var item in @Model.ReadingListRowsForCreate)
                     {
                         <div class="row">
-                            <div class="col-xs-6">
+                            <div class="col-xs-5">
                                 @item.Name
                             </div>
-                            <div class="col-xs-6">
-                                @item.Description
+                            <div class="col-xs-5">
+                                @item.Description @Html.Raw("&nbsp")
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-2">
                                 <input type="checkbox" id="checkbox_@item.Id" data-itemId="@item.Id"/>
                             </div>
                         </div>
