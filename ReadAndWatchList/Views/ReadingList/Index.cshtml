@@ -68,12 +68,8 @@
             <div class="modal-body">
                 
                 <div id="booksAndMoviesForList" class="vscrollbar maxHeight200 well">
-                    @{ 
-                        int i = 0;
-                    }
                     @foreach (var item in @Model.ReadingListRowsForCreate)
                     {
-                        i++;
                         <div class="row">
                             <div class="col-xs-6">
                                 @item.Name
@@ -82,7 +78,7 @@
                                 @item.Description
                             </div>
                             <div class="col-xs-12">
-                                <input type="checkbox" id="readingListRow@(i)" />
+                                <input type="checkbox" id="checkbox_@item.Id" data-itemId="@item.Id"/>
                             </div>
                         </div>
                     }
