@@ -1,4 +1,5 @@
-﻿using ReadAndWatchList.Models;
+﻿using ReadAndWatchList.Classes;
+using ReadAndWatchList.Models;
 using ReadAndWatchList.Repositories;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,23 @@ namespace ReadAndWatchList.Controllers
             {
                 return View(Grades);
             }
+        }
+
+        [HttpPost]
+        public ActionResult CreateGrade(string name, string desc)
+        {
+            Grades grade = new Grades { Name = name, Description = desc };
+            try
+            {
+                _gradesRepo.Create(grade);
+                return ApiResult.Success(null);
+            }
+            catch(Exception ex)
+            {
+
+                return ApiResult.Fail(ex.Message);
+            }
+           
         }
 
         // GET: Categories/Edit/5
