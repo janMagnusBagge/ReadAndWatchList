@@ -45,6 +45,40 @@
             alert("Request failed: " + textStatus);
         });
     }
+
+    //$('.details').click(function () {
+    //    var gradeId = $(this).data('rowid');
+    //    getGradeDetails(gradeId);
+    //});
+    function getGradeDetails(id) {
+        
+        var data = {
+            id: id
+        }
+        debugger;
+        $.ajax({
+            url: "/Grades/DetailsForGrade",
+            type: "GET",
+            //type: "POST",
+            data: data,
+            dataType: "json"
+        })
+        .done(function (msg) {
+            if (msg.Success) {
+                $('#gradeModalContainer').html(msg.Data.modalContent);
+                $('#gradeModal').modal('toggle');
+                //$('#modalRow').html(msg.Data.modalDivsAndData);
+                console.log("msg.Data",msg.Data);
+                $('#txtGradeName').html(msg.Data.modelData.Name);
+                $('#txtGradeDescription').html(msg.Data.modelData.Description);
+            }
+            else
+                alert("Somthing when wrong with creating grade");
+        })
+        .fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+    }
 </script>
 <div class="well-sm">
     <div class="btn-toolbar">
@@ -88,6 +122,7 @@
                                 <a href="@Url.Action("Edit", new { id=item.Id})" class="btn btn-info btn-sm col-xs-12" title="Edit">Edit <span class="glyphicon glyphicon-edit"></span></a>
                             </td>
                             <td class="col-xs-4">
+                                <button type="button" onclick="getGradeDetails(@item.Id)" data-rowid="@item.Id" class="details btn btn-warning btn-sm col-xs-12" title="Details">Details <span class="glyphicon glyphicon-expand"></span></button>
                                 <a href="@Url.Action("Details", new { id=item.Id})" class="btn btn-warning btn-sm col-xs-12" title="Details">Details <span class="glyphicon glyphicon-expand"></span></a>
                             </td>
                             <td class="col-xs-4">
@@ -141,6 +176,12 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
+
+    </div>
+</div>
+
+<div id="gradeModal" class="modal fade" role="dialog">
+    <div id="gradeModalContainer">
 
     </div>
 </div>

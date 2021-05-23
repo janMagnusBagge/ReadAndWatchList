@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ReadAndWatchList.ViewModels;
 
 namespace ReadAndWatchList.Controllers
 {
@@ -35,6 +36,44 @@ namespace ReadAndWatchList.Controllers
             }
             return View(_grades);
 
+        }
+        [HttpGet]
+        public ActionResult DetailsForGrade(int id)
+        {
+            var modelData = new GradesViewModel( _gradesRepo.GetSpecifik(id));
+            
+            var propAndDisplayName = typeof(GradesViewModel).DisplayNameForAllPropertiesInClass();
+
+            //var modalContent = this.RenderViewToString("~/GradeModals/GradeDetailsModal", null);
+            var modalContent = this.RenderViewToString("GradeModals/GradeDetailsModal");
+            string sBuilder = "";
+            foreach(var prop in modelData.GetType().GetProperties())
+            {
+                var propDict = propAndDisplayName.FirstOrDefault(x => x.Key == prop.Name);
+                if(prop.Name != "Id")
+                {
+                    //string tempFormGroupStart = "<div class=\"form-group col-md-12\">";
+                    //string tempFormGroupEnd = "</div>";
+                    string tempLable = "<div class=\"col-md-2\"><label for=\"txtGrade" + propDict.Key + "\">" + propDict.Value + "</label></div>";
+                    string tempValue = "<div class=\"col-md-10\"><div id=\"txtGrade" + propDict.Key + "\">" + prop.GetValue(modelData) + "</div></div>";
+
+                    //sBuilder += tempFormGroupStart + tempLable + tempValue + tempFormGroupEnd;
+                    sBuilder += tempLable + tempValue;
+                }
+            }
+            //foreach(var prop in propAndDisplayName)
+            //{
+            //    string tempLable = "<div class=\"col-md-2\"><label for=\"txtGrade"+ prop.Key+ "\">" + prop.Value + "</label></div>";
+            //    string tempValue = "<div class=\"col-md-10\"><label id=\"txtGrade" + prop.Key + "\">" + modelData. + "</label></div>";
+            //}
+            var returnData = new
+            {
+                modalContent = modalContent,
+                modelData = modelData,
+                propAndDisplayName = propAndDisplayName,
+                modalDivsAndData = sBuilder
+            };
+            return ApiResult.Success(returnData);
         }
 
         // GET: Categories/Create
